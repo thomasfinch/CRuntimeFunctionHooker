@@ -73,11 +73,18 @@ static void ctor(void) {
 
     printf("Offset: %x\n", offset);
     int64_t instruction = 0xe9 | offset << 8;
-    printf("Instruction: %llx\n", instruction);
-    *origFunc = instruction;
-    if (offset >> 24 != 0) {
-        *(origFunc + 1) = offset >> 24;
-    }
+
+    int64_t *temp = malloc(5);
+    *temp = instruction;
+    memcpy(origFunc, temp, 5);
+
+    // memset(origFunc, instruction, 5);
+
+    // printf("Instruction: %llx\n", instruction);
+    // *origFunc = instruction;
+    // if (instruction >> 24 != 0) {
+    //     *(origFunc + 1) = instruction >> 24;
+    // }
 
     if (PRINT_INFO) {
         printf("After replacement: \n");
