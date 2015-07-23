@@ -20,4 +20,4 @@ else ifeq ($(PLATFORM),Darwin) # Mac OS X
 endif
 
 clean:
-	rm testProgram inject.o inject.dylib inject.so
+	rm -f testProgram inject.o inject.dylib inject.so
