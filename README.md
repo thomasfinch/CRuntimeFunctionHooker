@@ -3,4 +3,16 @@ This is an example of how C functions can be hooked at runtime, similar to how [
 
 This is mostly an experiment, if you need a function hooking library you should use Cydia Substrate or Substitute as they're much more robust.
 
+To try this code on your own machine:
+
+```
+$ make
+$ ./testProgram
+Calling original function!
+The number is: 5
+$ DYLD_INSERT_LIBRARIES=inject.dylib ./testProgram
+Calling replacement function!
+The number is: 3
+```
+
 Tested on Mac OS 10.10, 64 bit. Not guaranteed to work on any other platforms, but definitely could with modifications.
