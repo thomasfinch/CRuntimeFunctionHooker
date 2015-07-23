@@ -6,7 +6,7 @@ build:
 ifeq ($(PLATFORM),Linux) # Linux
 	gcc -fpic -c -o inject.o inject.c
 	gcc -shared -o inject.so inject.o -ldl
-	gcc testProgram.c -o testProgram
+	gcc -fpic testProgram.c -o testProgram
 else ifeq ($(PLATFORM),Darwin) # Mac OS X
 	clang -dynamiclib inject.c -o inject.dylib
 	clang testProgram.c -o testProgram
