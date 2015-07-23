@@ -1,3 +1,5 @@
 .DS_Store
 testProgram
 inject.dylib
+inject.o
+inject.so
