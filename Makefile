@@ -3,18 +3,18 @@
 PLATFORM := $(shell uname -s)
 
 build:
-ifeq ($(PLATFORM),Linux)
+ifeq ($(PLATFORM),Linux) # Linux
 	gcc -fpic -c -o inject.o inject.c
 	gcc -shared -o inject.so inject.o
 	gcc testProgram.c -o testProgram
-else
+else ifeq($(PLATFORM),Darwin) # Mac OS X
 	clang -dynamiclib inject.c -o inject.dylib
 	clang testProgram.c -o testProgram
 endif
 
 run:
-ifeq ($(PLATFORM),Linux)
-else
+ifeq ($(PLATFORM),Linux) # Linux
+else ifeq($(PLATFORM),Darwin) # Mac OS X
 	DYLD_INSERT_LIBRARIES=inject.dylib ./testProgram
 endif
 
