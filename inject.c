@@ -9,7 +9,7 @@
 //Set this to 0 if you don't want to see log messages
 const int PRINT_INFO = 1;
 
-__attribute__((visibility("default")))
+//__attribute__((visibility("default")))
 static int hookReplacementFunction() {
     printf("Calling replacement function!\n");
     return 3;
@@ -17,7 +17,8 @@ static int hookReplacementFunction() {
 
 //Print the first 16 bytes after the given address
 static void printBytes(int64_t *address) {
-    for (int i = 0; i < 4; i++) {
+	int i;
+    for (i = 0; i < 4; i++) {
         printf("*(address+%d):\t%08x\n", i * 4, htonl((int)*(address+i)));
     }
 }
