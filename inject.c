@@ -6,12 +6,6 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
-#ifdef __APPLE__
-    #include <machine/endian.h>
-    #include <libkern/OSByteOrder.h>
-    #define htonll(x)       __DARWIN_OSSwapInt64(x)
-#endif
-
 //Set this to 0 if you don't want to see log messages
 const int PRINT_INFO = 1;
 
