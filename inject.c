@@ -70,12 +70,8 @@ static void ctor(void) {
     //Set the first instruction of the original function to be a jump
     //  to the replacement function.
     //E9 is the x86 opcode for an unconditional relative jump
-
-    printf("Offset: %x\n", offset);
     int64_t instruction = 0xe9 | offset << 8;
-    printf("Instruction: %llx\n", instruction);
     *origFunc = instruction;
-    *(origFunc + 1) = instruction >> 24;
 
     if (PRINT_INFO) {
         printf("After replacement: \n");
