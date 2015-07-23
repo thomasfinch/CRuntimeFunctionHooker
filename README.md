@@ -3,4 +3,4 @@ This is an example of how C functions can be hooked at runtime, similar to how [
 
 This is mostly an experiment, if you need a function hooking library you should use Cydia Substrate or Substitute as they're much more robust.
 
-Tested on Mac OS 10.10, 64 bit. 1000% not guaranteed to work on any other platforms.
+Tested on Mac OS 10.10, 64 bit. Not guaranteed to work on any other platforms, but definitely could with modifications.
