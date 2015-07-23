@@ -50,7 +50,7 @@ static void ctor(void) {
     //Calculate the relative offset needed for the jump instruction
     //Since relative jumps are calculated from the address of the next instruction,
     //  5 bytes must be added to the original address (jump instruction is 5 bytes)
-    int64_t offset = (int64_t)newFunc - ((int64_t)origFunc + 5 * sizeof(char));
+    int32_t offset = (int64_t)newFunc - ((int64_t)origFunc + 5 * sizeof(char));
     if (PRINT_INFO)
         printf("Offset: 0x%x\n", offset);
 
@@ -73,18 +73,9 @@ static void ctor(void) {
 
     printf("Offset: %x\n", offset);
     int64_t instruction = 0xe9 | offset << 8;
-
-    int64_t *temp = malloc(5);
-    *temp = instruction;
-    memcpy(origFunc, temp, 5);
-
-    // memset(origFunc, instruction, 5);
-
-    // printf("Instruction: %llx\n", instruction);
-    // *origFunc = instruction;
-    // if (instruction >> 24 != 0) {
-    //     *(origFunc + 1) = instruction >> 24;
-    // }
+    printf("Instruction: %llx\n", instruction);
+    *origFunc = instruction;
+    *(origFunc + 1) = instruction >> 24;
 
     if (PRINT_INFO) {
         printf("After replacement: \n");
