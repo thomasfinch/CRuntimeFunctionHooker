@@ -6,6 +6,7 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+//Set this to 0 if you don't want to see log messages
 const int PRINT_INFO = 1;
 
 __attribute__((visibility("default")))
