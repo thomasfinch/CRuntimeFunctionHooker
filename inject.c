@@ -50,7 +50,7 @@ static void ctor(void) {
     //Calculate the relative offset needed for the jump instruction
     //Since relative jumps are calculated from the address of the next instruction,
     //  5 bytes must be added to the original address (jump instruction is 5 bytes)
-    int32_t offset = (int64_t)newFunc - ((int64_t)origFunc + 5 * sizeof(char));
+    int64_t offset = (int64_t)newFunc - ((int64_t)origFunc + 5 * sizeof(char));
     if (PRINT_INFO)
         printf("Offset: 0x%x\n", offset);
 
@@ -72,10 +72,12 @@ static void ctor(void) {
     //E9 is the x86 opcode for an unconditional relative jump
 
     printf("Offset: %x\n", offset);
-    int64_t off = offset;
-    int64_t instr = 0xe9 | off << 8;
-    printf("Instruction: %llx\n", instr);
-    *origFunc = instr;
+    int64_t instruction = 0xe9 | offset << 8;
+    printf("Instruction: %llx\n", instruction);
+    *origFunc = instruction;
+    if (offset >> 24 != 0) {
+        *(origFunc + 1) = offset >> 24;
+    }
 
     if (PRINT_INFO) {
         printf("After replacement: \n");
