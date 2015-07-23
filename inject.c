@@ -6,6 +6,12 @@
 #include <sys/mman.h>
 #include <unistd.h>
 
+#ifdef __APPLE__
+    #include <machine/endian.h>
+    #include <libkern/OSByteOrder.h>
+    #define htonll(x)       __DARWIN_OSSwapInt64(x)
+#endif
+
 //Set this to 0 if you don't want to see log messages
 const int PRINT_INFO = 1;
 
@@ -64,8 +70,12 @@ static void ctor(void) {
     //Set the first instruction of the original function to be a jump
     //  to the replacement function.
     //E9 is the x86 opcode for an unconditional relative jump
-    //Htonl is used to flip the endian-ness
-    *origFunc = htonl(0xe9000000) | offset << 8;
+
+    printf("Offset: %x\n", offset);
+    int64_t off = offset;
+    int64_t instr = 0xe9 | off << 8;
+    printf("Instruction: %llx\n", instr);
+    *origFunc = instr;
 
     if (PRINT_INFO) {
         printf("After replacement: \n");
