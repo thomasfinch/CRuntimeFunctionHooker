@@ -9,7 +9,7 @@
 //Set this to 0 if you don't want to see log messages
 const int PRINT_INFO = 1;
 
-static int hookReplacementFunction() {
+int hookReplacementFunction() {
     printf("Calling replacement function!\n");
     return 3;
 }
