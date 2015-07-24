@@ -17,4 +17,4 @@ Calling replacement function!
 The number is: 3
 ```
 
-The makefile also includes a target for running the code (`make run`) so you don't have to type it out every time.
+The makefile also includes a target for running the code with the dylib injected (`make run`) so you don't have to type it out every time.
